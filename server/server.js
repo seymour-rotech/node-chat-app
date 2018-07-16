@@ -37,6 +37,11 @@ io.on('connect', (socket) =>{
 
     socket.on('createMessage', (message) => {
         console.log('createMessage', message)
+        io.emit('newMessage', {
+            from : message.from,
+            text : message.text,
+            craetedAt: new Date().getTime()
+        })
     })
 
     socket.on('createEmail', (newEmail) => {
