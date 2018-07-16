@@ -11,7 +11,7 @@ socket.on('connect', function () {
     // socket.emit('createMessage', {
     //     from: 'Andrew',
     //     text: 'Yup, that works for me within index.js'
-    // })
+    // }) 
 })
 
 socket.on('disconnect', function () {
