@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000
 var app = express()
 
 //var server = http.createServer(app)
-var server = app.listen(3000, () => {
+var server = app.listen(port, () => {
     console.log(`Starting on Port ${port}`)
 })
 var io = socketIO.listen(server)
