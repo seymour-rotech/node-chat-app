@@ -14,7 +14,6 @@ var server = app.listen(3000, () => {
 })
 var io = socketIO.listen(server)
 
-
 app.use(express.static(publicPath))
 
 io.on('connect', (socket) =>{
