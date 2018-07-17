@@ -16,7 +16,8 @@ var io = socketIO.listen(server)
 
 app.use(express.static(publicPath))
 
-io.on('connect', (socket) =>{
+io.on('connect', function (socket) {
+
     console.log('New User Connected')
 
     socket.on('disconnect', () => {
@@ -24,24 +25,37 @@ io.on('connect', (socket) =>{
     })
 
     socket.emit('newMessage', {
-        from : 'John',
-        text : 'See you then within server.js',
-        createAt : 12345 
+        from : 'Admin',
+        text : 'Welcome to the chat app',
+        createAt : new Date().getTime() 
     })
 
+    socket.broadcast.emit('newMessage', {
+        from : 'Admin',
+        text : 'New user joined',
+        createAt: new Date().getTime()
+    })
+    
     socket.emit('newEmail', {
         from : 'mike@example.com',
         text : 'Hey. What is going on within server.js',
         createAt: 123
     })
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', function (message) {
         console.log('createMessage', message)
-        io.emit('newMessage', {
+        // io.emit('newMessage', {
+        //     from : message.from,
+        //     text : message.text,
+        //     craetedAt: new Date().getTime()
+        // })
+
+           socket.broadcast.emit('newMessage', {
             from : message.from,
             text : message.text,
             craetedAt: new Date().getTime()
         })
+
     })
 
     socket.on('createEmail', (newEmail) => {
