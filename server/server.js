@@ -32,12 +32,15 @@ io.on('connect', (socket) => {
     socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message)
 
-        io.emit('newMessage', generateMessage(message.from, message.text + ' : io.emit'))
+        io.emit('newMessage', generateMessage(message.from, message.text))
         callback('This is from server');
     })
 
     socket.on('createLocationMessage', (coords) =>{
+        console.log('createLocationMessage', 'Admin', coords.latitude, coords.longitude)
+
         io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude))
+        console.log('newLocationMessage')
     })
 })
 
